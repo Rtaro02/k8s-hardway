@@ -7,7 +7,10 @@ resource "google_compute_instance" "default" {
   network_interface {
       network = google_compute_network.this.name
       network_ip = "10.240.0.10"
-      subnetwork = "kubernetes"
+      subnetwork = "kubernetes-the-hard-way"
+      access_config {
+          network_tier = "PREMIUM"
+      }
   }
   can_ip_forward = true
   boot_disk {
