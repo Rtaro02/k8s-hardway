@@ -1,5 +1,5 @@
-resource "google_compute_instance" "default" {
-  for_each = toset([ 0, 1, 2 ])
+resource "google_compute_instance" "controller" {
+  for_each = toset([ "0", "1", "2" ])
   name         = "controller-${each.value}"
   machine_type = "e2-standard-2"
   zone         = "us-west1-a"
