@@ -1,12 +1,13 @@
 resource "google_compute_instance" "default" {
-  name         = "controller-0"
+  for_each = toset([ 0, 1, 2 ])
+  name         = "controller-${each.value}"
   machine_type = "e2-standard-2"
   zone         = "us-west1-a"
 
   tags = ["kubernetes-the-hard-way", "controller"]
   network_interface {
       network = google_compute_network.this.name
-      network_ip = "10.240.0.10"
+      network_ip = "10.240.0.1${each.value}"
       subnetwork = "kubernetes-the-hard-way"
       access_config {
           network_tier = "PREMIUM"
