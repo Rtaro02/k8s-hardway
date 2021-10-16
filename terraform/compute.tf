@@ -1,6 +1,7 @@
 resource "google_compute_instance" "controller" {
-  project      = local.project_id
   for_each     = toset(["0", "1", "2"])
+
+  project      = local.project_id
   name         = "controller-${each.value}"
   machine_type = "e2-standard-2"
   zone         = "us-west1-a"
@@ -25,11 +26,16 @@ resource "google_compute_instance" "controller" {
   service_account {
     scopes = ["compute-rw", "storage-ro", "service-management", "service-control", "logging-write", "monitoring"]
   }
+  scheduling {
+    preemptible       = true
+    automatic_restart = false
+  }
 }
 
 resource "google_compute_instance" "worker" {
-  project      = local.project_id
   for_each     = toset(["0", "1", "2"])
+
+  project      = local.project_id
   name         = "worker-${each.value}"
   machine_type = "e2-standard-2"
   zone         = "us-west1-a"
@@ -56,5 +62,9 @@ resource "google_compute_instance" "worker" {
   }
   service_account {
     scopes = ["compute-rw", "storage-ro", "service-management", "service-control", "logging-write", "monitoring"]
+  }
+  scheduling {
+    preemptible       = true
+    automatic_restart = false
   }
 }
