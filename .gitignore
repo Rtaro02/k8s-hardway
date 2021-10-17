@@ -3,3 +3,4 @@ terraform/.terraform
 *.pem
 *.csr
 *.kubeconfig
+*.yaml
