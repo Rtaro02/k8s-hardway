@@ -5,7 +5,7 @@ resource "google_compute_network" "this" {
 }
 
 resource "google_compute_subnetwork" "this" {
-  name          = "kubernetes-the-hard-way"
+  name          = "kubernetes"
   ip_cidr_range = "10.240.0.0/24"
   region        = "us-west1"
   network       = google_compute_network.this.id
