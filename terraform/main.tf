@@ -1,5 +1,5 @@
 resource "google_compute_instance" "controller" {
-  for_each     = toset(["0", "1", "2"])
+  for_each = toset(["0", "1", "2"])
 
   project      = local.project_id
   name         = "controller-${each.value}"
@@ -33,7 +33,7 @@ resource "google_compute_instance" "controller" {
 }
 
 resource "google_compute_instance" "worker" {
-  for_each     = toset(["0", "1", "2"])
+  for_each = toset(["0", "1", "2"])
 
   project      = local.project_id
   name         = "worker-${each.value}"
