@@ -4,7 +4,7 @@ resource "google_compute_instance" "controller" {
   project      = local.project_id
   name         = "controller-${each.value}"
   machine_type = "e2-standard-2"
-  zone         = "us-west1-a"
+  zone         = "${local.region}-a"
 
   tags = ["kubernetes-the-hard-way", "controller"]
   network_interface {
@@ -38,7 +38,7 @@ resource "google_compute_instance" "worker" {
   project      = local.project_id
   name         = "worker-${each.value}"
   machine_type = "e2-standard-2"
-  zone         = "us-west1-a"
+  zone         = "${local.region}-a"
 
   tags = ["kubernetes-the-hard-way", "worker"]
   network_interface {

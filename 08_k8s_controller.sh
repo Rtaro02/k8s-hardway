@@ -1,4 +1,4 @@
-for instance in controller-0; do
+for instance in controller-0 controller-1 controller-2; do
   ## Install apiserver, controller-manager, scheduler, kubectl
   gcloud compute ssh $instance --command='{
     sudo mkdir -p /etc/kubernetes/config
