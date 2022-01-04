@@ -95,3 +95,12 @@ resource "google_compute_forwarding_rule" "kubernetes_forwarding_rule" {
   port_range = "6443"
   ip_address = google_compute_address.kubernetes_the_hard_way.address
 }
+
+resource "google_compute_route" "kubernetes" {
+  for_each = toset(["0", "1", "2"])
+
+  name        = "kubernetes-route-10-200-${each.value}"
+  dest_range  = "10.200.${each.value}.0/24"
+  network     = google_compute_network.this.name
+  next_hop_ip = "10.240.0.2${each.value}"
+}
